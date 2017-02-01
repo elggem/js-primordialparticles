@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This is an unofficial JS clone of the [PPS System](http://zool33.uni-graz.at/artlife/PPS) for cool demonstration purposes.
+This is an unofficial JS clone of the [PPS System](http://zool33.uni-graz.at/artlife/PPS) for cool demonstration purposes. It runs perfectly on an iPhone 6 but might not run smoothly on other browser/OS combinations yet... It is based on a simplistic JS multi agent simulation.
 
 > [How a life-like system emerges from a simplistic particle motion law.](http://www.nature.com/articles/srep37969) Thomas Schmickl, Martin Stefanec, Karl Crailsheim
 
