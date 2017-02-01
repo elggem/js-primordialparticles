@@ -10,7 +10,7 @@ This is an unofficial JS clone of the [PPS System](http://zool33.uni-graz.at/art
 
 ## How to run
 
-Open index.html in your browser.
+For development open `index.html` on your local machine. The gh-page branch, can be seen here: https://elggem.github.io/js-primordialparticles/
 
 ## TODOS
 
