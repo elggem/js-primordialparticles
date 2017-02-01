@@ -14,7 +14,7 @@ For development open `index.html` on your local machine. The gh-page branch, can
 
 ## TODOS
 
-  - Implement better edge behaviour with no artifacts
+  - Implement edge behaviour with no artifacts (agents in cone does not handle torroidal wrapped space, instead agents "on the other side" appear far away...)
   - Determine population density with acceptable FPS and adjust accordingly, introduce scaling to remain performant on slow machines and not drop below threshold for density.
   - Parameter tuning to achieve better behaviour.
   - ...?
