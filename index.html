@@ -1,0 +1,35 @@
+<head>
+  
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="agents.css">
+	<title>Primordeal Particle System</title>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	
+	<script src="./agents.js"></script>
+	<meta name="viewport" content="width=320, initial-scale=1, user-scalable = no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<style>
+	* { padding: 0; margin:0;}
+	
+	body {
+	  font-family: 'Open Sans', sans-serif;
+	  background-color:#111;
+
+	}
+	</style>
+</head>
+<body onload = "initSimulation();">
+	
+<div id="simulation">
+	<div id="buttons">
+		<a id="pause" onclick="pauseButton()">pause</a>
+		<a id="reset" onclick="resetButton()">reset</a>
+		
+		<a id="slower" onclick="slowerButton()">slower</a>
+		<a id="faster" onclick="fasterButton()">faster</a>
+	</div>
+	<canvas id="agents"></canvas>
+</div>
+
+</body>
