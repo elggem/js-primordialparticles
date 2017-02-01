@@ -15,7 +15,8 @@ Open index.html in your browser.
 ## TODOS
 
   - Implement better edge behaviour with no artifacts
-  - Determine population density with acceptable FPS and adjust accordingly
+  - Determine population density with acceptable FPS and adjust accordingly, introduce scaling to remain performant on slow machines and not drop below threshold for density.
+  - Parameter tuning to achieve better behaviour.
   - ...?
 
 ## Participate
