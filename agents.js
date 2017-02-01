@@ -27,6 +27,12 @@ var SimGlobal = {
 }
 
 function Vector(){
+
+  // The JS Modulo Bug
+  Number.prototype.mod = function(n) {
+    return ((this%n)+n)%n;
+  };
+
 	/** Data.  Apologies for one-letter variable name. */
 	this.d = new Array(2);
 	
@@ -54,7 +60,7 @@ function Agent() {
 	this.sensor_b_angle = 90;
   this.sensor_aperture = 175;
 	
-  this.update = function () {    
+  this.update = function() {
     //update position.
     this.updatePosition();
     
@@ -82,9 +88,6 @@ function Agent() {
     else if (N > 35) this.hue = 58
     else if (N < 15) this.hue = 121
       else this.hue = 310
-    
-    
-
   }
   
   this.die = function () {
@@ -159,13 +162,12 @@ function Agent() {
   }
   
   this.updatePosition = function () {
-    if (this.position.d[0]<0) this.position.d[0] = SimGlobal.SCREEN_WIDTH;
-    if (this.position.d[0]>SimGlobal.SCREEN_WIDTH) this.position.d[0] = 0;
-    if (this.position.d[1]<0) this.position.d[1] = SimGlobal.SCREEN_HEIGHT;
-    if (this.position.d[1]>SimGlobal.SCREEN_HEIGHT) this.position.d[1] = 0;
     this.position.d[0]+=this.velocity.d[0];
     this.position.d[1]+=this.velocity.d[1];
-    
+
+    this.position.d[0] = this.position.d[0].mod(SimGlobal.SCREEN_WIDTH);
+    this.position.d[1] = this.position.d[1].mod(SimGlobal.SCREEN_HEIGHT);
+
     //update color
     var hue = Math.floor(Math.abs(this.hue));
     this.color = "hsl("+hue+",100%, 50%)";
