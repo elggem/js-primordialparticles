@@ -27,6 +27,12 @@ var SimGlobal = {
 }
 
 function Vector(){
+
+  // The JS Modulo Bug
+  Number.prototype.mod = function(n) {
+    return ((this%n)+n)%n;
+  };
+
 	/** Data.  Apologies for one-letter variable name. */
 	this.d = new Array(2);
 	
@@ -54,7 +60,7 @@ function Agent() {
 	this.sensor_b_angle = 90;
   this.sensor_aperture = 175;
 	
-  this.update = function () {    
+  this.update = function() {
     //update position.
     this.updatePosition();
     
@@ -82,9 +88,6 @@ function Agent() {
     else if (N > 35) this.hue = 58
     else if (N < 15) this.hue = 121
       else this.hue = 310
-    
-    
-
   }
   
   this.die = function () {
@@ -139,16 +142,32 @@ function Agent() {
       if (SimGlobal.agents[i] == this) continue;
       
       //get position of other agent
-      var x = SimGlobal.agents[i].position.d[0];
-      var y = SimGlobal.agents[i].position.d[1];
-      var dx = x-this.position.d[0];
-      var dy = y-this.position.d[1];
-      
+      var x1 = this.position.d[0]
+      var y1 = this.position.d[1]
+      var x2 = SimGlobal.agents[i].position.d[0];
+      var y2 = SimGlobal.agents[i].position.d[1];
+
+      var xmax = SimGlobal.SCREEN_WIDTH
+      var ymax = SimGlobal.SCREEN_HEIGHT
+
+      //calculate angle to point
+      var dx = x2-x1;
+      var dy = y2-y1;
+
+      //fix for wraparound space
+      while (dx < -xmax / 2)
+        dx += xmax
+      while (dy < -ymax / 2)
+        dy += ymax
+      while (dx > xmax / 2)
+        dx -= xmax
+      while (dy > ymax / 2)
+        dy -= ymax
+
       //calculate distance and refuse if outside length
       var distance = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
       if (distance>length) continue;
       
-      //calculate angle to point
       var agent_angle_rad = Math.atan2(dy,dx);
       if (agent_angle_rad>(angle_rad+aperture_rad) || agent_angle_rad<angle_rad) continue;
       
@@ -159,13 +178,12 @@ function Agent() {
   }
   
   this.updatePosition = function () {
-    if (this.position.d[0]<0) this.position.d[0] = SimGlobal.SCREEN_WIDTH;
-    if (this.position.d[0]>SimGlobal.SCREEN_WIDTH) this.position.d[0] = 0;
-    if (this.position.d[1]<0) this.position.d[1] = SimGlobal.SCREEN_HEIGHT;
-    if (this.position.d[1]>SimGlobal.SCREEN_HEIGHT) this.position.d[1] = 0;
     this.position.d[0]+=this.velocity.d[0];
     this.position.d[1]+=this.velocity.d[1];
-    
+
+    this.position.d[0] = this.position.d[0].mod(SimGlobal.SCREEN_WIDTH);
+    this.position.d[1] = this.position.d[1].mod(SimGlobal.SCREEN_HEIGHT);
+
     //update color
     var hue = Math.floor(Math.abs(this.hue));
     this.color = "hsl("+hue+",100%, 50%)";
@@ -219,6 +237,7 @@ function initSimulation() {
     SimGlobal.SCREEN_WIDTH = div.scrollWidth;
     SimGlobal.SCREEN_HEIGHT = div.scrollHeight;
     SimGlobal.AGENT_COUNT = SimGlobal.SCREEN_WIDTH * SimGlobal.SCREEN_HEIGHT * SimGlobal.POPULATION_DENSITY
+    resetButton()
   };
 }
 

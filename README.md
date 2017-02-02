@@ -10,11 +10,10 @@ This is an unofficial JS clone of the [PPS System](http://zool33.uni-graz.at/art
 
 ## How to run
 
-Open index.html in your browser.
+For development open `index.html` on your local machine. The gh-page branch, can be seen here: https://elggem.github.io/js-primordialparticles/
 
 ## TODOS
 
-  - Implement better edge behaviour with no artifacts
   - Determine population density with acceptable FPS and adjust accordingly, introduce scaling to remain performant on slow machines and not drop below threshold for density.
   - Parameter tuning to achieve better behaviour.
   - ...?
