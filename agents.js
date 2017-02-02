@@ -142,16 +142,32 @@ function Agent() {
       if (SimGlobal.agents[i] == this) continue;
       
       //get position of other agent
-      var x = SimGlobal.agents[i].position.d[0];
-      var y = SimGlobal.agents[i].position.d[1];
-      var dx = x-this.position.d[0];
-      var dy = y-this.position.d[1];
-      
+      var x1 = this.position.d[0]
+      var y1 = this.position.d[1]
+      var x2 = SimGlobal.agents[i].position.d[0];
+      var y2 = SimGlobal.agents[i].position.d[1];
+
+      var xmax = SimGlobal.SCREEN_WIDTH
+      var ymax = SimGlobal.SCREEN_HEIGHT
+
+      //calculate angle to point
+      var dx = x2-x1;
+      var dy = y2-y1;
+
+      //fix for wraparound space
+      while (dx < -xmax / 2)
+        dx += xmax
+      while (dy < -ymax / 2)
+        dy += ymax
+      while (dx > xmax / 2)
+        dx -= xmax
+      while (dy > ymax / 2)
+        dy -= ymax
+
       //calculate distance and refuse if outside length
       var distance = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
       if (distance>length) continue;
       
-      //calculate angle to point
       var agent_angle_rad = Math.atan2(dy,dx);
       if (agent_angle_rad>(angle_rad+aperture_rad) || agent_angle_rad<angle_rad) continue;
       
