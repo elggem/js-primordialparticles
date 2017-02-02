@@ -237,6 +237,7 @@ function initSimulation() {
     SimGlobal.SCREEN_WIDTH = div.scrollWidth;
     SimGlobal.SCREEN_HEIGHT = div.scrollHeight;
     SimGlobal.AGENT_COUNT = SimGlobal.SCREEN_WIDTH * SimGlobal.SCREEN_HEIGHT * SimGlobal.POPULATION_DENSITY
+    resetButton()
   };
 }
 
